@@ -1,0 +1,7 @@
+#Permite reescribir el funcionamiento del servidor
+RewriteEngine On
+#Si el archivo o directorio no existe aplica la regla de redirección
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#Redirige todas las solicitudes al archivo index.php
+RewriteRule . index.php [L]

@@ -1,0 +1,158 @@
+Listado de rutas de carpetas
+El numero de serie del volumen es DE32-5269
+C:.
+|   .htaccess
+|   composer.json
+|   composer.lock
+|   estructura.txt
+|   index.php
+|   
++---logs
+|       php-error.log
+|       
++---public
+|   \---images
+|       +---site
+|       \---user
++---src
+|   +---components
+|   +---config
+|   |       Config.php
+|   |       
+|   +---controllers
+|   |       addDepartamento.php
+|   |       addUsuario.php
+|   |       buscarDoc.php
+|   |       Error404.php
+|   |       Inicio.php
+|   |       listaDepartamentos.php
+|   |       listaUsuarios.php
+|   |       login.php
+|   |       perfil.php
+|   |       subirDoc.php
+|   |       
+|   +---lib
+|   |       Controller.php
+|   |       Database.php
+|   |       Ftp.php
+|   |       Model.php
+|   |       Routes.php
+|   |       View.php
+|   |       
+|   +---models
+|   |       login.php
+|   |       Prueba.php
+|   |       
+|   \---views
+|       +---addDepartamento
+|       |   |   index.php
+|       |   |   
+|       |   \---modulos
+|       |           formulario.php
+|       |           index.php
+|       |           
+|       +---addUsuario
+|       |   |   index.php
+|       |   |   
+|       |   \---modulos
+|       |           formulario.php
+|       |           index.php
+|       |           
+|       +---buscarDoc
+|       |   |   index.php
+|       |   |   
+|       |   \---modulos
+|       |           buscador.php
+|       |           tabla.php
+|       |           
+|       +---error404
+|       |       index.php
+|       |       
+|       +---includes
+|       |       footer.php
+|       |       header.php
+|       |       menu.php
+|       |       navbar.php
+|       |       tablaDinamica.php
+|       |       
+|       +---inicio
+|       |   |   index.php
+|       |   |   
+|       |   \---modulos
+|       |           calendario.php
+|       |           cards.php
+|       |           grafica.php
+|       |           
+|       +---listaDepartamentos
+|       |   |   index.php
+|       |   |   
+|       |   \---modulos
+|       |           buscador.php
+|       |           tabla.php
+|       |           
+|       +---listaUsuarios
+|       |   |   index.php
+|       |   |   
+|       |   \---modulos
+|       |           buscador.php
+|       |           tabla.php
+|       |           
+|       +---login
+|       |       index.php
+|       |       
+|       +---perfil
+|       |       index.php
+|       |       
+|       \---subirDoc
+|           |   index.php
+|           |   
+|           \---modulos
+|                   formulario.php
+|                   
+\---vendor
+    |   autoload.php
+    |   
+    +---bramus
+    |   \---router
+    |       |   .gitignore
+    |       |   .php_cs.dist
+    |       |   CHANGELOG.md
+    |       |   composer.json
+    |       |   LICENSE
+    |       |   phpunit.xml.dist
+    |       |   README.md
+    |       |   
+    |       +---.github
+    |       |   \---workflows
+    |       |           CI.yml
+    |       |           
+    |       +---demo
+    |       |       .htaccess
+    |       |       index.php
+    |       |       
+    |       +---demo-multilang
+    |       |       .htaccess
+    |       |       index.php
+    |       |       
+    |       +---src
+    |       |   \---Bramus
+    |       |       \---Router
+    |       |               Router.php
+    |       |               
+    |       \---tests
+    |               bootstrap.php
+    |               RouterTest.php
+    |               
+    \---composer
+            autoload_classmap.php
+            autoload_namespaces.php
+            autoload_psr4.php
+            autoload_real.php
+            autoload_static.php
+            ClassLoader.php
+            installed.json
+            installed.php
+            InstalledVersions.php
+            LICENSE
+            platform_check.php
+            
