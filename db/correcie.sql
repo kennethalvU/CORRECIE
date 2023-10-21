@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2023 a las 19:25:43
+-- Tiempo de generación: 21-10-2023 a las 08:21:13
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `siscieg_app`
+-- Base de datos: `correcie`
 --
 
 -- --------------------------------------------------------
@@ -61,12 +61,15 @@ INSERT INTO `departamentos` (`id_departamento`, `nombre`, `descripcion`) VALUES
 
 CREATE TABLE `documentos` (
   `id_documento` int(11) NOT NULL,
-  `titulo` varchar(255) NOT NULL,
-  `ruta` varchar(512) NOT NULL,
-  `fecha_subida` datetime DEFAULT current_timestamp(),
-  `palabras_clave` text DEFAULT NULL,
-  `usuario_subido_por` int(11) DEFAULT NULL,
-  `version` int(11) NOT NULL DEFAULT 1
+  `ruta_doc` varchar(512) NOT NULL,
+  `tipo_doc` varchar(255) DEFAULT NULL,
+  `descripcion_doc` text DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `fecha_insert` datetime DEFAULT current_timestamp(),
+  `folder` varchar(255) DEFAULT NULL,
+  `caja` varchar(255) DEFAULT NULL,
+  `no_folio` varchar(255) DEFAULT NULL,
+  `usuario_subido_por` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -109,7 +112,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `usuario`, `nombre`, `contraseña`, `id_rol`, `id_departamento`) VALUES
-(2, 'kennethalv', 'Kenneth Bolvito', '123', 2, 1);
+(2, 'kennethalv', 'Kenneth Bolvito', '123', 2, 1),
+(0, 'juanlop', 'Juan Lopez', '123', 3, 2);
 
 --
 -- Índices para tablas volcadas
@@ -142,65 +146,14 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id_rol`);
 
 --
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `email` (`nombre`),
-  ADD KEY `id_rol` (`id_rol`),
-  ADD KEY `id_departamento` (`id_departamento`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
-
---
--- AUTO_INCREMENT de la tabla `departamentos`
---
-ALTER TABLE `departamentos`
-  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `documentos`
---
-ALTER TABLE `documentos`
-  MODIFY `id_documento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `acceso_documentos`
---
-ALTER TABLE `acceso_documentos`
-  ADD CONSTRAINT `acceso_documentos_ibfk_1` FOREIGN KEY (`id_documento`) REFERENCES `documentos` (`id_documento`),
-  ADD CONSTRAINT `acceso_documentos_ibfk_2` FOREIGN KEY (`id_departamento`) REFERENCES `departamentos` (`id_departamento`);
-
---
--- Filtros para la tabla `documentos`
---
-ALTER TABLE `documentos`
-  ADD CONSTRAINT `documentos_ibfk_1` FOREIGN KEY (`usuario_subido_por`) REFERENCES `usuarios` (`id_usuario`);
-
---
--- Filtros para la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`),
-  ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`id_departamento`) REFERENCES `departamentos` (`id_departamento`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

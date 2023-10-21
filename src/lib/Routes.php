@@ -12,6 +12,7 @@ use App\controllers\Perfil;
 use App\controllers\SubirDoc;
 
 $router = new \Bramus\Router\Router();
+
 session_start();
 
 $router->before('GET', '/.*', function () {
@@ -88,6 +89,11 @@ $router->get('/buscarDoc', function () {
     $controller->render('buscarDoc/index');
 });
 
+$router->post('/buscarDoc', function () {
+    $controller = new BuscarDoc;
+    $controller->llenarTablaDoc();
+});
+
 $router->get('/subirDoc', function () {
     if (!isset($_SESSION['usuario'])) {
         header('Location: login');
@@ -96,9 +102,13 @@ $router->get('/subirDoc', function () {
     $_SESSION['titulo'] = 'Subir Documentos';
 
     $controller = new SubirDoc;
-    //$controller->cargarRoles();
     $controller->render('subirDoc/index');
+});
 
+$router->post('/subirDoc', function () {
+    $controller = new SubirDoc;
+    $controller->llenarSelectDepartamento();
+    $controller->subirDoc();
 });
 
 $router->get('/addUsuario', function () {
@@ -121,6 +131,11 @@ $router->get('/listaUsuarios', function () {
 
     $controller = new ListaUsuarios;
     $controller->render('listaUsuarios/index');
+});
+
+$router->post('/listaUsuarios', function () {
+    $controller = new ListaUsuarios;
+    $controller->llenarTabla();
 });
 
 $router->get('/listaDepartamentos', function () {
@@ -153,8 +168,8 @@ $router->get('/logout', function () {
 });
 
 $router->get('/prueba', function () {
-    $controller = new Inicio;
-    echo $controller->prueba();
+    $controller = new ListaUsuarios;
+    echo $controller->llenarTabla();
 });
 
 $router->run(function () {

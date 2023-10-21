@@ -24,4 +24,12 @@ class Model
     {
         return $this->db->conexionDb()->prepare($query);
     }
+
+    public function convertir_utf8($array)
+    {
+        array_walk_recursive($array, function (&$item, $key) {
+            if (!mb_detect_encoding($item, 'utf-8', true)) {
+                $item = mb_convert_encoding($item, 'UTF-8', 'ISO-8859-1'); }});
+        return $array;
+    }
 }

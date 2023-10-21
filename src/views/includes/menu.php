@@ -65,12 +65,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="buscarDoc" class="nav-link">
-                <i class="fas fa-file nav-icon"></i>
-                <p>Mis Documentos</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="fas fa-history nav-icon"></i>
                 <p>Versiones de Documentos </p>

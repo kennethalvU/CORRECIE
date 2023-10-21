@@ -2,51 +2,62 @@
     <table id="tablaDocs" class="table table-hover table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th>Departamento</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Usuario</th>
+                <th class="text-center">Rol</th>
+                <th class="text-center">Departamento</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Kenneth Bolvito</td>
-                <td>kennethalv20@gmail.com</td>
-                <td>Administrador</td>
-                <td>Personal</td>
-            </tr>
-            <tr>
-            <td>Juan Perez</td>
-                <td>juanperez@gmail.com</td>
-                <td>General</td>
-                <td>Informatica</td>
-            </tr>
-            <tr>
-                <td>Mario Lopez</td>
-                <td>mariolopez@gmail.com</td>
-                <td>General</td>
-                <td>Juridico</td>
-            </tr>
-            <tr>
-                <td>Mishel Sanchez</td>
-                <td>mishelsanchez@gmail.com</td>
-                <td>Invitado</td>
-                <td>Financiero</td>
-            </tr>
-            <tr>
-                <td>Pedro Gutierres</td>
-                <td>pedrogutierres@gmail.com</td>
-                <td>Administrador</td>
-                <td>Informatica</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Rol</th>
-                <th>Departamento</th>
-            </tr>
-        </tfoot>
+        <tbody id="tableBody"></tbody>
     </table>
 </div>
+
+
+<script>
+
+
+    function obtenerListadoUsuarios() {
+
+        const url = 'listaUsuarios';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Request error');
+                }
+                return response.json();
+            })
+            .then(data => {
+                renderTable(data);
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+    }
+
+    function renderTable(userData) {
+        let tableBody = document.getElementById('tableBody');
+
+        console.log(userData);
+
+        userData.forEach(user => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td class="text-center">${user.Nombre}</td>
+                    <td class="text-center">${user.Usuario}</td>
+                    <td class="text-center">${user.Rol}</td>
+                    <td class="text-center">${user.Departamento}</td>
+                </tr>
+            `;
+        });
+    }
+
+    obtenerListadoUsuarios();
+
+
+</script>
