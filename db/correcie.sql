@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2023 a las 08:21:13
+-- Tiempo de generación: 21-10-2023 a las 17:13:16
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -21,6 +21,35 @@ SET time_zone = "+00:00";
 -- Base de datos: `correcie`
 --
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_INSERT_INFO_DOC` (IN `id_departamento` INT, IN `tipoDoc` VARCHAR(255), IN `descripcion` TEXT, IN `fecha` DATETIME, IN `destino` VARCHAR(255), IN `folder` VARCHAR(255), IN `caja` VARCHAR(255), IN `observaciones` TEXT, IN `ruta` VARCHAR(512))   BEGIN
+    DECLARE v_id_documento INT;
+
+    -- Handlers for potential errors during execution
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    -- Start a transaction
+    START TRANSACTION;
+    
+    INSERT INTO documentos(ruta_doc, tipo_doc, descripcion_doc, fecha, folder, caja, destino)
+    VALUES(ruta, tipoDoc, descripcion, fecha, folder, caja, destino);
+    
+    SET v_id_documento = LAST_INSERT_ID();
+    
+    INSERT INTO acceso_documentos(id_documento, id_departamento)
+    VALUES(v_id_documento, id_departamento);
+    
+    COMMIT;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -31,6 +60,13 @@ CREATE TABLE `acceso_documentos` (
   `id_documento` int(11) NOT NULL,
   `id_departamento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `acceso_documentos`
+--
+
+INSERT INTO `acceso_documentos` (`id_documento`, `id_departamento`) VALUES
+(0, 2);
 
 -- --------------------------------------------------------
 
@@ -69,8 +105,16 @@ CREATE TABLE `documentos` (
   `folder` varchar(255) DEFAULT NULL,
   `caja` varchar(255) DEFAULT NULL,
   `no_folio` varchar(255) DEFAULT NULL,
-  `usuario_subido_por` int(11) DEFAULT NULL
+  `usuario_subido_por` int(11) DEFAULT NULL,
+  `destino` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `documentos`
+--
+
+INSERT INTO `documentos` (`id_documento`, `ruta_doc`, `tipo_doc`, `descripcion_doc`, `fecha`, `fecha_insert`, `folder`, `caja`, `no_folio`, `usuario_subido_por`, `destino`) VALUES
+(0, 'public\\documents\\POF-OP-02-SFSA-Isls-2018', 'P/OF-OP-02-SFSA-Isls-2018', 'Solicitando que sean evaluados los señores Gutierrez Pérez y Guzmán Velásquez, para optar a las plazas vacantes del Segundo Batallón de Ingenieros de Construcción de este Comando.', '2018-01-03 01:27:20', '2023-10-21 01:24:48', '1', '5', '6', NULL, '2BIC');
 
 -- --------------------------------------------------------
 
